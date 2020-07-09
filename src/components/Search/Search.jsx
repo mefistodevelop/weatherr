@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import './Search.css';
+import { api } from '../../api/api';
 
-export const Search = () => {
+export const Search = ({ setWeather }) => {
   const [query, setQuery] = useState('');
 
   const updateQuery = (e) => setQuery(e.target.value);
-  const send = (e) => {
+  const send = async (e) => {
     if (e.key === 'Enter') {
-      console.log(`Query "${query}" is sent`);
+      const weather = await api.getWeather(query);
+      setWeather(weather);
       setQuery('');
     }
   };
-
   return (
     <div className="search">
       <input
