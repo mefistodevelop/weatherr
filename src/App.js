@@ -26,13 +26,25 @@ function App() {
     if (Math.round(temperature) <= 5) return 'cold';
   }
 
+  function toggleLanguage() {
+    if (globalState.language === 'en') {
+      globalActions.toggleLang('ru');
+    } else {
+      globalActions.toggleLang('en');
+    }
+    console.log(globalState.language);
+  }
+
   return (
     <div className={`App ${defineClassname()}`}>
       <div className="App__wrapper">
         <Search
           setWeather={globalActions.setWeather}
           setIsFetching={globalActions.setIsFetching}
+          language={globalState.language}
         />
+
+        <button type="button" onClick={toggleLanguage}>{globalState.language}</button>
 
         {globalState.isFetching
           ? <Spinner size={100} />

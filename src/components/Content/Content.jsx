@@ -9,7 +9,7 @@ export const Content = ({ store, isWeatherDefined }) => (
         <Location city={store.name} country={store.sys.country} />
         <Weather
           temperature={store.main.temp}
-          weather={store.weather[0].main}
+          weather={store.weather[0].description}
         />
       </>
     ) : (

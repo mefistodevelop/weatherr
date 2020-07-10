@@ -4,6 +4,7 @@ import globalHook from 'use-global-hook';
 const initialState = {
   weather: {},
   isFetching: false,
+  language: 'en',
 };
 
 const actions = {
@@ -12,6 +13,9 @@ const actions = {
   },
   setIsFetching(store, isFetching) {
     store.setState({ isFetching });
+  },
+  toggleLang(store, language) {
+    store.setState({ language });
   },
 };
 

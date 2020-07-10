@@ -9,9 +9,9 @@ const instance = axios.create({
 });
 
 export const api = {
-  getWeather(city) {
+  getWeather(city, language = 'en') {
     return instance
-      .get(`weather?q=${city}&units=metric&appid=${API_KEY}`)
+      .get(`weather?q=${city}&units=metric&appid=${API_KEY}&lang=${language}`)
       .then((response) => response.data);
   },
 };
