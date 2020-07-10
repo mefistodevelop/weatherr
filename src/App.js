@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import { Search } from './components/Search/Search';
 import { useGlobal } from './store/store';
-import { Location } from './components/Location/Location';
-import { Weather } from './components/Weather/Weather';
+import Spinner from './components/Spinner/Spinner';
+import { Content } from './components/Content/Content';
 
 function App() {
   const [globalState, globalActions] = useGlobal();
@@ -22,24 +22,23 @@ function App() {
     const temperature = globalState.weather.main.temp;
 
     if (weather === 'rain') return weather;
-    if (Math.round(temperature) > 28) return 'hot';
-    if (Math.round(temperature) < 5) return 'cold';
+    if (Math.round(temperature) >= 28) return 'hot';
+    if (Math.round(temperature) <= 5) return 'cold';
   }
 
   return (
     <div className={`App ${defineClassname()}`}>
       <div className="App__wrapper">
-        <Search setWeather={globalActions.setWeather} />
+        <Search
+          setWeather={globalActions.setWeather}
+          setIsFetching={globalActions.setIsFetching}
+        />
 
-        {isWeatherDefined() ? (
-          <>
-            <Location city={globalState.weather.name} country={globalState.weather.sys.country} />
-            <Weather
-              temperature={globalState.weather.main.temp}
-              weather={globalState.weather.weather[0].main}
-            />
-          </>
-        ) : ''}
+        {globalState.isFetching
+          ? <Spinner size={100} />
+          : (
+            <Content store={globalState.weather} isWeatherDefined={isWeatherDefined} />
+          )}
       </div>
     </div>
   );
