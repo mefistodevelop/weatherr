@@ -16,14 +16,17 @@ function App() {
   }
 
   function defineClassname() {
-    if (!isWeatherDefined()) return;
+    if (!isWeatherDefined()) return '';
 
+    let className = '';
     const weather = globalState.weather.weather[0].main.toLowerCase();
-    const temperature = globalState.weather.main.temp;
+    const temperature = Math.round(globalState.weather.main.temp);
 
-    if (weather === 'rain') return weather;
-    if (Math.round(temperature) >= 28) return 'hot';
-    if (Math.round(temperature) <= 5) return 'cold';
+    if (weather === 'rain') className = weather;
+    if (temperature >= 28) className = 'hot';
+    if (temperature <= 5) className = 'cold';
+
+    return className;
   }
 
   function toggleLanguage() {
