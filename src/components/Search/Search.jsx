@@ -8,13 +8,17 @@ export const Search = ({ setWeather, setIsFetching, language }) => {
   const updateQuery = (e) => setQuery(e.target.value);
   const send = async (e) => {
     if (e.key === 'Enter') {
+      const trimmedQuery = query.trim();
+      if (!trimmedQuery) return;
+
       setIsFetching(true);
-      const weather = await api.getWeather(query, language);
+      const weather = await api.getWeather(trimmedQuery, language);
       setIsFetching(false);
       setWeather(weather);
       setQuery('');
     }
   };
+
   return (
     <div className="search">
       <input
