@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Search } from './components/Search/Search';
 import { useGlobal } from './store/store';
 import Spinner from './components/Spinner/Spinner';
 import { Content } from './components/Content/Content';
+import { Header } from './components/Header/Header';
+import { api } from './api/api';
 
 function App() {
   const [globalState, globalActions] = useGlobal();
 
-  function isWeatherDefined() {
+  const isWeatherDefined = () => {
     if (Object.keys(globalState.weather).length !== 0) {
       return true;
     }
     return false;
-  }
+  };
 
-  function defineClassname() {
+  const defineClassname = () => {
     if (!isWeatherDefined()) return '';
 
     let className = '';
@@ -27,27 +29,35 @@ function App() {
     if (temperature <= 5) className = 'cold';
 
     return className;
-  }
+  };
 
-  function toggleLanguage() {
-    if (globalState.language === 'en') {
-      globalActions.toggleLang('ru');
-    } else {
-      globalActions.toggleLang('en');
+  const updateWeather = async () => {
+    if (globalState.weather.name) {
+      globalActions.setIsFetching(true);
+
+      const newWeather = await api.getWeather(globalState.weather.name, globalState.language);
+      globalActions.setWeather(newWeather);
+
+      globalActions.setIsFetching(false);
     }
-    console.log(globalState.language);
-  }
+  };
+
+  useEffect(() => {
+    updateWeather();
+  }, [globalState.language]);
 
   return (
     <div className={`App ${defineClassname()}`}>
+      <Header
+        language={globalState.language}
+        toggleLang={globalActions.toggleLang}
+      />
       <div className="App__wrapper">
         <Search
           setWeather={globalActions.setWeather}
           setIsFetching={globalActions.setIsFetching}
           language={globalState.language}
         />
-
-        <button type="button" onClick={toggleLanguage}>{globalState.language}</button>
 
         {globalState.isFetching
           ? <Spinner size={100} />
