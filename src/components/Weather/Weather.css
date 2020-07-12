@@ -2,20 +2,27 @@
   text-align: center;
   color: white;
   font-weight: 700;
-  text-shadow: 3px 3px rgba(58, 53, 53, 0.73);
+  text-shadow: 2px 2px rgba(58, 53, 53, 0.73);
+  cursor: default;
 }
 
 .weather__temperature {
   position: relative;
   display: inline-block;
-  margin: 30px auto;
-  padding: 15px 25px;
-  font-size: 100px;
+  margin: 1.875rem auto;
+  padding: 0.9375rem 1.5625rem;
+  font-size: 6.25rem;
   background-color: rgb(255, 255, 255, 0.1);
   border-radius: 16px;
-  box-shadow: 3px 3px rgba(58, 53, 53, 0.73);
+  box-shadow: 0.1875rem 0.1875rem rgba(58, 53, 53, 0.73);
 }
 
 .weather__description {
-  font-size: 50px;
+  font-size: 3.125rem;
+}
+
+@media (max-width: 576px) {
+  .weather__description {
+    font-size: 2.1rem;
+  }
 }
