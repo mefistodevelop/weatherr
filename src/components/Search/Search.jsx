@@ -5,7 +5,9 @@ import { api } from '../../api/api';
 export const Search = ({ setWeather, setIsFetching, language }) => {
   const [query, setQuery] = useState('');
 
+  const placeholder = language === 'en' ? 'Search weather' : 'Искать погоду';
   const updateQuery = (e) => setQuery(e.target.value);
+
   const send = async (e) => {
     if (e.key === 'Enter') {
       const trimmedQuery = query.trim();
@@ -24,7 +26,7 @@ export const Search = ({ setWeather, setIsFetching, language }) => {
       <input
         type="text"
         className="search__bar"
-        placeholder="Search..."
+        placeholder={placeholder}
         value={query}
         onChange={updateQuery}
         onKeyPress={send}
