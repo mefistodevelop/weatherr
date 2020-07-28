@@ -21,3 +21,7 @@
 .App.cold {
   background: linear-gradient(to top, #1CB5E0, #000046);
 }
+
+.App.clouds {
+  background: linear-gradient(to bottom, #bdcad9 0%, #e1dada 74%);
+}

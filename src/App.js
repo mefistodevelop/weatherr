@@ -26,9 +26,13 @@ function App() {
     const weatherStatus = weatherState.weather[0].main.toLowerCase();
     const temperature = Math.round(weatherState.main.temp);
 
-    if (weatherStatus === 'rain') className = weatherStatus;
-    if (temperature >= 28) className = 'hot';
-    if (temperature <= 5) className = 'cold';
+    if (weatherStatus === 'rain' || weatherStatus === 'clouds') className = weatherStatus;
+
+    if (temperature >= 28) {
+      className = 'hot';
+    } else if (temperature <= 5) {
+      className = 'cold';
+    }
 
     return className;
   };
