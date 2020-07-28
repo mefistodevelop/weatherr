@@ -39,15 +39,6 @@ const setWeather = (weather) => ({ type: SET_WEATHER, payload: weather });
 const setIsFetching = (isFetching) => ({ type: SET_IS_FETCHING, payload: isFetching });
 export const toggleLanguage = (language) => ({ type: TOGGLE_LANGUAGE, payload: language });
 
-export const updateWeather = (state) => async (dispatch) => {
-  if (state.weather.name) {
-    dispatch(setIsFetching(true));
-    const newWeather = await api.getWeather(state.weather.name, state.language);
-    dispatch(setWeather(newWeather));
-    dispatch(setIsFetching(false));
-  }
-};
-
 export const searchWeather = (city, language) => async (dispatch) => {
   dispatch(setIsFetching(true));
   const weather = await api.getWeather(city, language);

@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Search } from './components/Search/Search';
 import Spinner from './components/Spinner/Spinner';
 import { Content } from './components/Content/Content';
 import { Header } from './components/Header/Header';
-import { updateWeather } from './store/weatherReducer';
+import { searchWeather } from './store/weatherReducer';
 
 function App() {
   const weatherState = useSelector((state) => state.weather);
   const isFetching = useSelector((state) => state.isFetching);
   const language = useSelector((state) => state.language);
+  const currentCity = useSelector((state) => state.weather.name);
+  const dispatch = useDispatch();
 
   const isWeatherDefined = () => {
     if (Object.keys(weatherState).length !== 0) {
@@ -35,6 +37,10 @@ function App() {
     }
 
     return className;
+  };
+
+  const updateWeather = () => {
+    if (currentCity) dispatch(searchWeather(currentCity, language));
   };
 
   useEffect(() => {
