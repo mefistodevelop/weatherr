@@ -38,3 +38,7 @@ You will also see any lint errors in the console.
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+### `npm run deploy`
+
+Deploys project from build directory to gitHub pages
