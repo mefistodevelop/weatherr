@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import './Search.css';
-import { api } from '../../api/api';
+import { useDispatch } from 'react-redux';
+import { searchWeather } from '../../store/weatherReducer';
 
-export const Search = ({ setWeather, setIsFetching, language }) => {
+export const Search = ({ language }) => {
   const [query, setQuery] = useState('');
+  const dispatch = useDispatch();
 
   const placeholder = language === 'en' ? 'Search weather' : 'Искать погоду';
   const updateQuery = (e) => setQuery(e.target.value);
 
-  const send = async (e) => {
+  const send = (e) => {
     if (e.key === 'Enter') {
       const trimmedQuery = query.trim();
       if (!trimmedQuery) return;
 
-      setIsFetching(true);
-      const weather = await api.getWeather(trimmedQuery, language);
-      setIsFetching(false);
-      setWeather(weather);
+      dispatch(searchWeather(trimmedQuery, language));
       setQuery('');
     }
   };

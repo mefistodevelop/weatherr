@@ -1,12 +1,16 @@
 import React from 'react';
 import './Header.css';
+import { useDispatch } from 'react-redux';
+import { toggleLanguage } from '../../store/weatherReducer';
 
-export const Header = ({ language, toggleLang }) => {
-  const toggleLanguage = () => {
+export const Header = ({ language }) => {
+  const dispatch = useDispatch();
+
+  const toggleLang = () => {
     if (language === 'en') {
-      toggleLang('ru');
+      dispatch(toggleLanguage('ru'));
     } else {
-      toggleLang('en');
+      dispatch(toggleLanguage('en'));
     }
   };
 
@@ -18,7 +22,7 @@ export const Header = ({ language, toggleLang }) => {
           type="button"
           className="header__toggle"
           aria-label="change language"
-          onClick={toggleLanguage}
+          onClick={toggleLang}
         >
           {language === 'en' ? 'ru' : 'en'}
         </button>

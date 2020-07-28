@@ -16,9 +16,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 **I also used:**
 
-- react-hooks for work with state
+- Redux, react-redux, redux-thunk for work with state
 - axios for work with rest-api
 - eslint and airbnb's style guide
+- hooks
 - [openweathermap API](https://openweathermap.org/api)
 
 ## Available Scripts

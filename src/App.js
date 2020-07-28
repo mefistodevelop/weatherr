@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import { useSelector } from 'react-redux';
 import { Search } from './components/Search/Search';
-import { useGlobal } from './store/store';
 import Spinner from './components/Spinner/Spinner';
 import { Content } from './components/Content/Content';
 import { Header } from './components/Header/Header';
-import { api } from './api/api';
+import { updateWeather } from './store/weatherReducer';
 
 function App() {
-  const [globalState, globalActions] = useGlobal();
+  const weatherState = useSelector((state) => state.weather);
+  const isFetching = useSelector((state) => state.isFetching);
+  const language = useSelector((state) => state.language);
 
   const isWeatherDefined = () => {
-    if (Object.keys(globalState.weather).length !== 0) {
+    if (Object.keys(weatherState).length !== 0) {
       return true;
     }
     return false;
@@ -21,48 +23,31 @@ function App() {
     if (!isWeatherDefined()) return '';
 
     let className = '';
-    const weather = globalState.weather.weather[0].main.toLowerCase();
-    const temperature = Math.round(globalState.weather.main.temp);
+    const weatherStatus = weatherState.weather[0].main.toLowerCase();
+    const temperature = Math.round(weatherState.main.temp);
 
-    if (weather === 'rain') className = weather;
+    if (weatherStatus === 'rain') className = weatherStatus;
     if (temperature >= 28) className = 'hot';
     if (temperature <= 5) className = 'cold';
 
     return className;
   };
 
-  const updateWeather = async () => {
-    if (globalState.weather.name) {
-      globalActions.setIsFetching(true);
-
-      const newWeather = await api.getWeather(globalState.weather.name, globalState.language);
-      globalActions.setWeather(newWeather);
-
-      globalActions.setIsFetching(false);
-    }
-  };
-
   useEffect(() => {
     updateWeather();
-  }, [globalState.language]);
+    // eslint-disable-next-line
+  }, [language]);
 
   return (
     <div className={`App ${defineClassname()}`}>
-      <Header
-        language={globalState.language}
-        toggleLang={globalActions.toggleLang}
-      />
+      <Header language={language} />
       <div className="App__wrapper">
-        <Search
-          setWeather={globalActions.setWeather}
-          setIsFetching={globalActions.setIsFetching}
-          language={globalState.language}
-        />
+        <Search language={language} />
 
-        {globalState.isFetching
+        {isFetching
           ? <Spinner size={100} />
           : (
-            <Content store={globalState.weather} isWeatherDefined={isWeatherDefined} />
+            <Content store={weatherState} isWeatherDefined={isWeatherDefined} />
           )}
       </div>
     </div>
