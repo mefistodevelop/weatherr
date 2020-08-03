@@ -27,7 +27,9 @@ function App() {
     let className = '';
     const weatherStatus = weatherState.weather[0].main.toLowerCase();
     const temperature = Math.round(weatherState.main.temp);
+    const currentTime = new Date().getHours();
 
+    if (!(currentTime <= 21 || currentTime < 5)) className = 'night';
     if (weatherStatus === 'rain' || weatherStatus === 'clouds') className = weatherStatus;
 
     if (temperature >= 28) {
