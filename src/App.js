@@ -45,6 +45,13 @@ function App() {
     if (currentCity) dispatch(searchWeather(currentCity, language));
   };
 
+  const getContent = () => {
+    if (isWeatherDefined()) {
+      return (<Content store={weatherState} />);
+    }
+    return '';
+  };
+
   useEffect(() => {
     updateWeather();
     // eslint-disable-next-line
@@ -58,9 +65,7 @@ function App() {
 
         {isFetching
           ? <Spinner size={100} />
-          : (
-            <Content store={weatherState} isWeatherDefined={isWeatherDefined} />
-          )}
+          : getContent()}
       </div>
     </div>
   );
