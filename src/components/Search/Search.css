@@ -1,6 +1,7 @@
 .search {
+  position: relative;
   width: 100%;
-  margin: 0 0 75px;
+  margin: 0 0 7.5rem;
 }
 
 @media (max-width: 576px) {
@@ -11,10 +12,10 @@
 
 .search__bar {
   color: black;
-  font-size: 15px;
+  font-size: 1.5rem;
   display: block;
   width: 100%;
-  padding: 0.9375rem;
+  padding: 1.5rem;
   border: none;
   outline: none;
   appearance: none;
@@ -26,4 +27,13 @@
 
 .search .search__bar:focus {
   background-color: white;
+}
+
+.search__icon {
+  position: absolute;
+  top: 11px;
+  right: 14px;
+  width: 24px;
+  height: 24px;
+  background: url('../../img/search.svg') center/ contain no-repeat;
 }

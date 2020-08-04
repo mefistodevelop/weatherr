@@ -30,6 +30,7 @@ export const Search = ({ language }) => {
         onChange={updateQuery}
         onKeyPress={send}
       />
+      <div className="search__icon" />
     </div>
   );
 };
