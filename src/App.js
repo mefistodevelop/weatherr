@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { Search } from './components/Search/Search';
 import Spinner from './components/Spinner/Spinner';
 import { Content } from './components/Content/Content';
 import { Header } from './components/Header/Header';
@@ -24,21 +23,17 @@ function App() {
   const defineClassname = () => {
     if (!isWeatherDefined()) return '';
 
-    let className = '';
     const weatherStatus = weatherState.weather[0].main.toLowerCase();
     const temperature = Math.round(weatherState.main.temp);
     const currentTime = new Date().getHours();
 
-    if (!(currentTime <= 21 || currentTime < 5)) className = 'night';
-    if (weatherStatus === 'rain' || weatherStatus === 'clouds') className = weatherStatus;
+    if (!(currentTime <= 21 || currentTime < 5)) return 'night';
+    if (weatherStatus === 'rain' || weatherStatus === 'clouds') return weatherStatus;
 
-    if (temperature >= 28) {
-      className = 'hot';
-    } else if (temperature <= 5) {
-      className = 'cold';
-    }
+    if (temperature >= 28) return 'hot';
+    if (temperature <= 5) return 'cold';
 
-    return className;
+    return '';
   };
 
   const updateWeather = () => {
