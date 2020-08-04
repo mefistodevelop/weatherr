@@ -45,12 +45,7 @@ function App() {
     if (currentCity) dispatch(searchWeather(currentCity, language));
   };
 
-  const getContent = () => {
-    if (isWeatherDefined()) {
-      return (<Content store={weatherState} />);
-    }
-    return '';
-  };
+  const content = isWeatherDefined() ? <Content store={weatherState} /> : '';
 
   useEffect(() => {
     updateWeather();
@@ -65,7 +60,7 @@ function App() {
 
         {isFetching
           ? <Spinner size={100} />
-          : getContent()}
+          : content}
       </div>
     </div>
   );
