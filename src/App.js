@@ -56,8 +56,6 @@ function App() {
     <div className={`App ${defineClassname()}`}>
       <Header language={language} />
       <div className="App__wrapper">
-        <Search language={language} />
-
         {isFetching
           ? <Spinner size={100} />
           : content}

@@ -1,4 +1,6 @@
 .header {
+  position: relative;
+
   display: flex;
   align-items: center;
   margin-bottom: 3rem;
@@ -25,9 +27,17 @@
   cursor: default;
 }
 
+.header__search {
+  width: 100%;
+  margin-left: 11rem;
+  margin-right: 18%;
+}
+
 .header__toggle {
+  display: block;
   width: 44px;
   height: 44px;
+
   font-family: Roboto;
   color: white;
   font-size: 2.4rem;
@@ -39,4 +49,27 @@
   background-color: transparent;
   box-shadow: 0 0 2px rgba(129, 123, 123, 0.3);
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .header__search {
+    margin: 0 10%;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    margin-bottom: 10rem;
+  }
+
+}
+
+@media (max-width: 576px) {
+  .header__search {
+    position: absolute;
+    bottom: -7rem;
+    left: 40%;
+    transform: translateX(-50%);
+    width: 90%;
+  }
 }
