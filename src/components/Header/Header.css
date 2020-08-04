@@ -34,8 +34,11 @@
 }
 
 .header__toggle {
+  position: relative;
   display: block;
-  width: 44px;
+
+  padding-left: 4rem;
+  width: 8rem;
   height: 44px;
 
   font-family: Roboto;
@@ -44,11 +47,19 @@
   text-align: center;
   text-transform: uppercase;
   text-shadow: 2px 2px rgba(58, 53, 53, 0.73);
-  border: 1px solid rgb(185, 184, 184);
-  border-radius: 7px;
+  border: none;
   background-color: transparent;
-  box-shadow: 0 0 2px rgba(129, 123, 123, 0.3);
   cursor: pointer;
+}
+
+.header__toggle::before {
+  content: '';
+  position: absolute;
+  top: .6rem;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  background: url('../../img/globe.svg') center/ contain no-repeat;
 }
 
 @media (max-width: 768px) {
